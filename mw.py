@@ -1,9 +1,9 @@
 import pandas as pd
 from tqdm import tqdm
-from api_mw import get_uniprot_from_enspid, get_uniprot_molecular_weight, get_protein_sequence, calculate_molecular_weight
+from api import get_uniprot_from_enspid, get_uniprot_molecular_weight, get_protein_sequence, calculate_molecular_weight
 
 
-def format_proteomics_data(file_path, save_path=None): 
+def load_from_paxdb(file_path, save_path=None): 
     """
     Reads human proteomics data from PaxDB (https://pax-db.org/species/9606), cleans the string_external_id column, 
     and converts abundance to mmol/gDW.
@@ -54,7 +54,7 @@ def format_proteomics_data(file_path, save_path=None):
     # Create DataFrame
     df_mw = pd.DataFrame(data)
     df_final = df.merge(df_mw, on="ENSPID", how="left")
-    df_final = df_final[["ENSPID", "UniProtID", "MolecularWeight"]]
+    df_final = df_final[["ENSPID", "UniProtID", "abundance", "MolecularWeight"]]
 
     if save_path:
         df_final.to_csv(save_path, index=False)
