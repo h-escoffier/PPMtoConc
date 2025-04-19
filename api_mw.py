@@ -1,6 +1,8 @@
 import requests
 import time
-import pandas as pd 
+import requests
+from Bio.SeqUtils import molecular_weight
+from Bio.Seq import Seq
 from bioservices import UniProt
 
 
@@ -49,6 +51,39 @@ def get_uniprot_molecular_weight(uniprot_id):
         return data['sequence']['molWeight']
     else:
         return None
+
+
+def get_protein_sequence(ensp_id):
+    """
+    Retrieves the protein sequence for a given Ensembl protein ID from the Ensembl REST API.
+    
+    Parameters:
+        ensp_id (str): The Ensembl protein ID.
+    Returns:
+        str: The protein sequence.
+    """
+    server = "https://rest.ensembl.org"
+    ext = f"/sequence/id/{ensp_id}?type=protein"
+    headers = {"Content-Type": "application/json"}
+    response = requests.get(server + ext, headers=headers)
+    data = response.json()
+
+    if 'seq' in data:
+        return data['seq']
+    else:
+        return None
+
+
+def calculate_molecular_weight(sequence):
+    """
+    Calculates the molecular weight of a protein sequence.
+
+    Parameters:
+        sequence (str): The protein sequence.
+    Returns:
+        float: The molecular weight of the protein sequence in Dalton.
+    """
+    return molecular_weight(Seq(sequence), seq_type='protein')
 
 
 # def run_api(input_data): 
