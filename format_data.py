@@ -62,7 +62,7 @@ def format_proteomics_data(file_path, save_path=None):
     return df_final
 
 
-test_file_path = "input/9606-iBAQ_MCF7_Geiger_2012_uniprot.txt"
-save_path = "output/cleaned_proteomics_data_2.csv"
-formatted_df = format_proteomics_data(test_file_path, save_path)
-print(formatted_df.head())
+# test_file_path = "input/9606-iBAQ_MCF7_Geiger_2012_uniprot.txt"
+# save_path = "output/cleaned_proteomics_data_2.csv"
+# formatted_df = format_proteomics_data(test_file_path, save_path)
+
