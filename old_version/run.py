@@ -1,5 +1,5 @@
-from mw import load_from_paxdb
-from convertion import convert_data
+from old_version.mw import load_from_paxdb
+from ppm_to_conc.conversion import convert_data
 
 
 def test(): 

@@ -1,6 +1,6 @@
 import pandas as pd
 from tqdm import tqdm
-from api import get_uniprot_from_enspid, get_uniprot_molecular_weight, get_protein_sequence, calculate_molecular_weight
+from ppm_to_conc.api import get_uniprot_from_enspid, get_uniprot_molecular_weight, get_protein_sequence, calculate_molecular_weight
 
 
 def load_from_paxdb(file_path, save_path=None): 

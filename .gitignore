@@ -8,3 +8,7 @@ __pycache__/
 # Ignore VS Code settings
 .vscode/
 tempCodeRunnerFile.py
+
+# Ignore Test related files 
+*.egg-info/
+.pytest_cache/
