@@ -12,3 +12,6 @@ tempCodeRunnerFile.py
 # Ignore Test related files 
 *.egg-info/
 .pytest_cache/
+
+# Ignore Output files
+output/

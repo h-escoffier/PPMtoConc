@@ -23,7 +23,7 @@ def fetch_uniprot_molecular_weight(uniprot_id):
     return None
 
 
-def fetch_protein_sequence(ensp_id, species=9606):
+def fetch_protein_sequence(ensp_id):
     server = "https://rest.ensembl.org"
     ext = f"/sequence/id/{ensp_id}?type=protein"
     headers = {"Content-Type": "application/json"}

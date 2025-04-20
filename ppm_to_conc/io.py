@@ -10,26 +10,55 @@ def load_paxdb(file_path, species=9606):
     return df
 
 
-def enrich_protein_data(df):
-    unique_enspid = df["ENSPID"].unique().tolist()
-    mapping = map_enspid_to_uniprot(unique_enspid)
+def load_tsv(file_path): 
+    df = pd.read_csv(file_path, sep="\t", header=0)
+    return df
 
-    enriched = []
-    for enspid in tqdm(unique_enspid, desc="Retrieving molecular weights.."): 
-        uniprot_id = mapping.get(enspid)
+
+def check_file_format(file_path):
+    with open(file_path, 'r') as file:
+        first_line = file.readline().strip()
+        if first_line.startswith("#"):
+            return "paxdb"
+        else:
+            return "tsv"
+
+
+def load_file(file_path, species=9606):
+    file_format = check_file_format(file_path)
+    if file_format == "paxdb":
+        return load_paxdb(file_path, species)
+    elif file_format == "tsv":
+        return load_tsv(file_path)
+    else:
+        raise ValueError("Unsupported file format. Please provide a valid PAXdb or TSV file.")
+
+
+def get_protein_molecular_weight(df, fill_missing=None):
+    unique_enspids = df["ENSPID"].unique().tolist()
+    enspid_to_uniprot = map_enspid_to_uniprot(unique_enspids)
+
+    mw_records = []
+    for enspid in tqdm(unique_enspids, desc="Retrieving molecular weights.."): 
+        uniprot_id = enspid_to_uniprot.get(enspid)
         mw = fetch_uniprot_molecular_weight(uniprot_id) if uniprot_id else None
         if mw is None:
             seq = fetch_protein_sequence(enspid)
             if seq:
                 mw = calculate_sequence_mw(seq)
-        enriched.append({
+        mw_records.append({
             "ENSPID": enspid,
             "UniProtID": uniprot_id,
             "MolecularWeight": mw
         })
 
-    df_mw = pd.DataFrame(enriched)
-    return df.merge(df_mw, on="ENSPID", how="left")
+    mw_df = pd.DataFrame(mw_records)
+
+    if fill_missing in ["mean", "median"]:
+        fill_value = mw_df["MolecularWeight"].mean() if fill_missing == "mean" else mw_df["MolecularWeight"].median()
+        mw_df["MolecularWeight"].fillna(fill_value, inplace=True)
+
+    return df.merge(mw_df, on="ENSPID", how="left")
 
 
 def convert_ppm_dataframe(df, total_prot_content=0.505717472):
