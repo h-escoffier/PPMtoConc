@@ -1,11 +1,11 @@
-from ppm_to_conc.io import load_file, get_protein_molecular_weight, convert_ppm_dataframe
+from ppm_to_conc.data_io import load_file, get_protein_molecular_weight, convert_ppm_dataframe
 
 
 def run(input_file, output_file):
     df = load_file(input_file)
     df_with_mw = get_protein_molecular_weight(df)
     df_converted = convert_ppm_dataframe(df_with_mw)
-    df_converted.to_csv(output_file, index=False)
+    df_converted.to_csv(output_file, sep='\t', index=False)
 
 
 if __name__ == "__main__":

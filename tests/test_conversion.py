@@ -1,4 +1,4 @@
-from ppm_to_conc import conversion
+import ppm_to_conc.conversion as conversion
 
 
 def test_calculate_sequence_mw():
@@ -10,8 +10,8 @@ def test_calculate_sequence_mw():
 
 
 def test_ppm_to_grams():
-    ppm = 459 
-    molecular_weight = 106874  # Dalton
+    ppm = 500 
+    molecular_weight = 100000 
 
     result = conversion.ppm_to_grams(ppm, molecular_weight)
 

@@ -1,5 +1,6 @@
 import pandas as pd
 from tqdm import tqdm
+
 from .api import map_enspid_to_uniprot, fetch_uniprot_molecular_weight, fetch_protein_sequence
 from .conversion import calculate_sequence_mw, ppm_to_grams
 
@@ -56,7 +57,8 @@ def get_protein_molecular_weight(df, fill_missing=None):
 
     if fill_missing in ["mean", "median"]:
         fill_value = mw_df["MolecularWeight"].mean() if fill_missing == "mean" else mw_df["MolecularWeight"].median()
-        mw_df["MolecularWeight"].fillna(fill_value, inplace=True)
+        mw_df["MolecularWeight"] = mw_df["MolecularWeight"].fillna(fill_value)
+
 
     return df.merge(mw_df, on="ENSPID", how="left")
 

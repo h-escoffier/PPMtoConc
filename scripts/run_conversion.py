@@ -1,5 +1,6 @@
 import argparse
-from ppm_to_conc.io import load_file, get_protein_molecular_weight, convert_ppm_dataframe
+
+from ppm_to_conc.data_io import load_file, get_protein_molecular_weight, convert_ppm_dataframe
 
 
 def main():
@@ -15,7 +16,7 @@ def main():
     df = load_file(args.input_file, species=args.species)
     df_with_mw = get_protein_molecular_weight(df, fill_missing=args.fill_missing)
     df_converted = convert_ppm_dataframe(df_with_mw, total_prot_content=args.total_protein_content)
-    df_converted.to_csv(args.output_file, index=False)
+    df_converted.to_csv(args.output_file, sep='\t', index=False)
 
 
 if __name__ == "__main__":
