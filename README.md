@@ -7,6 +7,7 @@ PPMtoConc is a tool for converting proteomics data reported in parts per million
 ## Definition of PPM 
 
 > The protein abundance is present in ppm which is short for parts per million. Abundance in 'ppm' is essentially describing each protein with reference to the entire expressed proteome.This means each protein entity is enumerated relative to all other protein molecules in the sample.
+>
 > From [PAXdb — Protein Abundance Database](https://pax-db.org/help).
 
 -----------------------
@@ -21,7 +22,9 @@ The conversion process is as follows:
 
 Each protein’s abundance in PPM is first converted into grams using its molecular weight:
 
-`mass_g = (abundance_ppm / 1e6) / Na * Molecular Weight`
+```
+mass_g = (abundance_ppm / 1e6) / Na * Molecular Weight
+```
 
 Where:
 * abundance_ppm is the protein's relative abundance (parts per million),
@@ -34,7 +37,9 @@ This calculation gives the estimated mass contribution of each protein based on 
 
 The computed masses are normalized so that their sum matches the experimentally determined total protein fraction in the cell dry weight (g/gDCW). The default value corresponds to the average Ptot in NCI60 cell lines.
 
-`Mass_g_per_gDCW = (mass_g / total_mass_g) * total_protein_content`
+```
+Mass_g_per_gDCW = (mass_g / total_mass_g) * total_protein_content
+```
 
 Where:
 * total_mass_g is the sum of all protein masses in the sample,
@@ -56,7 +61,9 @@ pip install -r requirements.txt
 
 This repository includes unit tests using pytest.
 
-`pytest`
+```
+pytest
+```
 
 This will automatically and run all tests under the tests/ directory.
 
