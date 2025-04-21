@@ -23,27 +23,27 @@ The conversion process is as follows:
 Each protein’s abundance in PPM is first converted into grams using its molecular weight:
 
 ```
-mass_g = (abundance_ppm / 1e6) / Na * Molecular Weight
+mass_g = (abundance_ppm / 1e6) / Na * mw
 ```
 
 Where:
-* abundance_ppm is the protein's relative abundance (parts per million),
-* Na is the Avogadro's number
-* Molecular Weight is given in Daltons.
+* `abundance_ppm` is the protein's relative abundance (parts per million),
+* `Na` is the Avogadro's number
+* `mw` is the molecular weight of the protein given in Daltons.
 
 This calculation gives the estimated mass contribution of each protein based on its abundance and molecular weight.
 
 **2. Normalization to Total Protein Content**
 
-The computed masses are normalized so that their sum matches the experimentally determined total protein fraction in the cell dry weight (g/gDCW). The default value corresponds to the average Ptot in NCI60 cell lines.
+The computed masses are normalized so that their sum matches the experimentally determined total protein fraction in the cell dry weight (g/gDCW). The default value corresponds to the average total protein content in the NCI60 cell lines.
 
 ```
 Mass_g_per_gDCW = (mass_g / total_mass_g) * total_protein_content
 ```
 
 Where:
-* total_mass_g is the sum of all protein masses in the sample,
-* total_protein_content is the expected total protein mass fraction in the biomass (default: 0.5057 g/gDCW).
+* `total_mass_g` is the sum of all protein masses in the sample,
+* `total_protein_content` is the expected total protein mass fraction in the biomass (default: 0.5057 g/gDCW).
 
 -----------------------
 
