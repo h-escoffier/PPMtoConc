@@ -15,3 +15,6 @@ tempCodeRunnerFile.py
 
 # Ignore Output files
 output/
+
+# Ignore personal notes 
+todo.txt

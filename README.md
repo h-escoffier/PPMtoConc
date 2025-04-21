@@ -1,6 +1,6 @@
 # PPMtoConc
 
-PPMtoConc is a tool for converting proteomics data reported in parts per million (ppm) into cellular protein concentrations, expressed as grams per gram of dry cell weight (g/gDCW). This conversion is useful for enzyme constrained metabolic modeling.
+PPMtoConc is a tool for converting **proteomics data reported in parts per million (ppm)** into **cellular protein concentrations**, expressed as grams per gram of dry cell weight (g/gDCW). This conversion is useful for enzyme constrained metabolic modeling.
 
 -----------------------
 
@@ -18,7 +18,7 @@ To integrate proteomics data into metabolic models, protein abundances measured 
 
 The conversion process is as follows:
 
-1. PPM to Grams Conversion
+**1. PPM to Grams Conversion**
 
 Each protein’s abundance in PPM is first converted into grams using its molecular weight:
 
@@ -33,7 +33,7 @@ Where:
 
 This calculation gives the estimated mass contribution of each protein based on its abundance and molecular weight.
 
-2. Normalization to Total Protein Content
+**2. Normalization to Total Protein Content**
 
 The computed masses are normalized so that their sum matches the experimentally determined total protein fraction in the cell dry weight (g/gDCW). The default value corresponds to the average Ptot in NCI60 cell lines.
 
@@ -93,7 +93,7 @@ python scripts/run_conversion.py data/9606-iBAQ_MCF7_Geiger_2012_uniprot.txt out
 
 ### Function-Based Usage
 
-The conversion can also be used in Python scripts by calling the run() function.
+The conversion can also be used in Python scripts by calling the `run()` function.
 
 ```
 from ppm_to_conc.data_io import load_file, get_protein_molecular_weight, convert_ppm_dataframe
