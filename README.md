@@ -2,13 +2,15 @@
 
 PPMtoConc is a tool for converting **proteomics data reported in parts per million (ppm)** into **cellular protein concentrations**, expressed as grams per gram of dry cell weight (g/gDCW). This conversion is useful for enzyme constrained metabolic modeling.
 
+*Protein abundance in ppm can be computed from peptide-level data using the [PaxDb compute tool](https://pax-db.org/compute).*
+
 -----------------------
 
 ## Definition of PPM 
 
 > The protein abundance is present in ppm which is short for parts per million. Abundance in 'ppm' is essentially describing each protein with reference to the entire expressed proteome.This means each protein entity is enumerated relative to all other protein molecules in the sample.
 >
-> From [PAXdb — Protein Abundance Database](https://pax-db.org/help).
+> From [PaxDb — Protein Abundance Database](https://pax-db.org/help).
 
 -----------------------
 
@@ -115,7 +117,7 @@ if __name__ == "__main__":
 
 ## Input Format 
 
-The input file should be either a `.txt` file download from the [PAXdb database](https://pax-db.org/download) or a `.tsv` file as follow : 
+The input file should be either a `.txt` file download from the [PaxDb database](https://pax-db.org/download) or a `.tsv` file as follow : 
 
 | ENSPID | Abundance_in_ppm |
 | :--------------- | :--------------- |
